@@ -1,0 +1,7 @@
+{
+  "name": "Emergency Life Alert",
+  "description": "A rapid-response emergency coordination platform with AI-powered first aid guidance and real-time alerts.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
