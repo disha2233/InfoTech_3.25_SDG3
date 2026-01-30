@@ -6,7 +6,7 @@ import { VitalsMonitor } from './components/VitalsMonitor';
 import { Button } from './components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { Ambulance, Activity, Home, Hospital } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { Toaster } from './components/ui/sonner';
 
 interface RequestData {
@@ -30,6 +30,7 @@ interface AmbulanceData {
     heartRate: number;
     oxygen: number;
     bloodPressure: string;
+    timestamp: number;
   };
 }
 
@@ -37,7 +38,7 @@ export default function App() {
   const [view, setView] = useState<'home' | 'patient-request' | 'assignment' | 'tracking'>('home');
   const [requestData, setRequestData] = useState<RequestData | null>(null);
   const [ambulanceData, setAmbulanceData] = useState<AmbulanceData | null>(null);
-  const [showVitals, setShowVitals] = useState(false);
+  const [_, setShowVitals] = useState(false);
 
   useEffect(() => {
     // Request notification permission on mount
@@ -49,7 +50,7 @@ export default function App() {
   const handleRequestAmbulance = (data: RequestData) => {
     setRequestData(data);
     setView('assignment');
-    
+
     toast.success('🚨 Emergency Request Sent', {
       description: `Searching for nearest ambulance for ${data.problemType}`,
     });
@@ -71,7 +72,8 @@ export default function App() {
       vitals: {
         heartRate: 85,
         oxygen: 95,
-        bloodPressure: '120/80'
+        bloodPressure: '120/80',
+        timestamp: Date.now()
       }
     };
 
@@ -214,7 +216,8 @@ export default function App() {
                         vitals: {
                           heartRate: 95,
                           oxygen: 92,
-                          bloodPressure: '130/85'
+                          bloodPressure: '130/85',
+                          timestamp: Date.now()
                         }
                       };
                       setAmbulanceData(mockData);

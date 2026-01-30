@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Button } from './ui/button';
+
 import { Ambulance, CheckCircle, MapPin, Navigation, Clock } from 'lucide-react';
 import { Progress } from './ui/progress';
 
@@ -73,7 +73,7 @@ export function AmbulanceAssignment({ patientLocation, problemType, onAssignment
     if (stage === 'found' && ambulances.length > 0) {
       // Stage 2: Auto-select nearest ambulance
       const assignTimer = setTimeout(() => {
-        const nearest = ambulances.reduce((prev, current) => 
+        const nearest = ambulances.reduce((prev, current) =>
           current.distance < prev.distance ? current : prev
         );
         setSelectedAmbulance(nearest);
@@ -91,10 +91,10 @@ export function AmbulanceAssignment({ patientLocation, problemType, onAssignment
       const confirmTimer = setTimeout(() => {
         setStage('assigned');
         setProgress(100);
-        
+
         // Show notification
         showNotification();
-        
+
         // Trigger completion
         setTimeout(() => {
           onAssignmentComplete(selectedAmbulance);
@@ -162,15 +162,14 @@ export function AmbulanceAssignment({ patientLocation, problemType, onAssignment
               {ambulances.map((amb, index) => {
                 const isSelected = selectedAmbulance?.id === amb.id;
                 const isNearest = index === 0;
-                
+
                 return (
                   <div
                     key={amb.id}
-                    className={`p-4 rounded-lg border-2 transition-all ${
-                      isSelected
+                    className={`p-4 rounded-lg border-2 transition-all ${isSelected
                         ? 'bg-green-50 border-green-400 shadow-lg scale-105'
                         : 'bg-white border-slate-200'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">

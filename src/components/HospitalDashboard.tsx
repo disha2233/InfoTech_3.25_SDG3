@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Ambulance, MapPin, Clock, Activity, User, Navigation } from 'lucide-react';
+import { Ambulance, MapPin, Clock, User, Navigation } from 'lucide-react';
 import { Progress } from './ui/progress';
 
 interface AmbulanceData {
@@ -34,15 +34,15 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
   useEffect(() => {
     if (ambulanceData) {
       setLiveEta(ambulanceData.eta);
-      
+
       // Simulate ETA countdown
       const interval = setInterval(() => {
         setLiveEta((prev) => {
           if (prev <= 0) return 0;
           return prev - 1;
         });
-        
-        setProgress((prev) => {
+
+        setProgress((_) => {
           const maxEta = ambulanceData.eta;
           const remaining = liveEta;
           return ((maxEta - remaining) / maxEta) * 100;
@@ -61,7 +61,7 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
             <h1 className="text-4xl font-bold text-slate-800 mb-2">Hospital Dashboard</h1>
             <p className="text-slate-600">Emergency Ambulance Monitoring System</p>
           </div>
-          
+
           <Card className="shadow-lg">
             <CardContent className="p-12 text-center">
               <Ambulance className="w-20 h-20 text-slate-300 mx-auto mb-4" />
@@ -141,7 +141,7 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
                       <div key={i} className="border border-slate-200/30" />
                     ))}
                   </div>
-                  
+
                   {/* Route Path */}
                   <svg className="absolute inset-0 w-full h-full">
                     <path
@@ -152,7 +152,7 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
                       strokeDasharray="8 4"
                     />
                   </svg>
-                  
+
                   {/* Ambulance Icon */}
                   <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse">
                     <div className="bg-red-600 text-white p-3 rounded-full shadow-lg">
@@ -162,7 +162,7 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
                       <Badge className="bg-red-600">Vehicle #{ambulanceData.vehicle}</Badge>
                     </div>
                   </div>
-                  
+
                   {/* Hospital Marker */}
                   <div className="absolute top-12 right-12">
                     <div className="bg-green-600 text-white p-3 rounded-full shadow-lg">
@@ -172,7 +172,7 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
                       <Badge className="bg-green-600 text-xs">Hospital</Badge>
                     </div>
                   </div>
-                  
+
                   {/* Patient Marker */}
                   <div className="absolute bottom-12 left-12">
                     <div className="bg-blue-600 text-white p-3 rounded-full shadow-lg">
@@ -248,7 +248,7 @@ export function HospitalDashboard({ ambulanceData }: HospitalDashboardProps) {
                   <p className="text-xs text-slate-600 mb-1">Emergency Type</p>
                   <p className="font-semibold text-red-700">{ambulanceData.patient.problemType}</p>
                 </div>
-                
+
                 <div className="space-y-2">
                   <p className="text-xs text-slate-600">Patient Location</p>
                   <div className="flex items-center gap-2 text-sm">
